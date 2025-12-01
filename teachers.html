@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المعلمون - سنتر الأطباء التعليمي</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="hex-grid"></div>
+
+<header class="header">
+  <div class="logo-container" id="logoContainer"></div>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="teachers.html">المعلمون</a>
+    <a href="about.html">عن المركز</a>
+    <a href="contact.html">تواصل معنا</a>
+  </nav>
+</header>
+
+<main>
+  <section class="teachers-section">
+    <h2 class="section-title">جميع المعلمين</h2>
+    <div id="teachersContainer" class="teachers-container"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div id="siteInfo"></div>
+    <div id="footerSocials" class="footer-socials"></div>
+  </div>
+  <p class="copy">© 2025 سنتر الأطباء التعليمي</p>
+</footer>
+
+<script type="module" src="script.js"></script>
+
+<script>
+  const container = document.querySelector('.hex-grid');
+
+  let hexes = [];
+  let radius = 120;
+
+  function createHexGrid() {
+    container.innerHTML = '';
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const hexW = 60;
+    const hexH = hexW * Math.sqrt(3)/2;
+    const gap = 4;
+
+    const cols = Math.ceil(width / (hexW + gap));
+    const rows = Math.ceil(height / (hexH * 0.75));
+
+    for (let r = 0; r < rows; r++) {
+      hexes[r] = [];
+      for (let c = 0; c < cols; c++) {
+        const hex = document.createElement('div');
+        hex.className = 'hex';
+        hex.style.width = `${hexW}px`;
+        hex.style.height = `${hexH}px`;
+
+        let x = c * (hexW + gap);
+        let y = r * (hexH * 0.75);
+
+        if (r % 2 !== 0) x += hexW / 2;
+
+        hex.style.left = `${x}px`;
+        hex.style.top = `${y}px`;
+
+        container.appendChild(hex);
+        hexes[r][c] = {el: hex, x: x + hexW/2, y: y + hexH/2};
+      }
+    }
+  }
+
+  createHexGrid();
+  window.addEventListener('resize', createHexGrid);
+
+  window.addEventListener('mousemove', e => {
+    const mx = e.clientX;
+    const my = e.clientY;
+
+    for (let r = 0; r < hexes.length; r++) {
+      for (let c = 0; c < hexes[r].length; c++) {
+        const hex = hexes[r][c].el;
+        const hx = hexes[r][c].x;
+        const hy = hexes[r][c].y;
+
+        const dist = Math.hypot(mx - hx, my - hy);
+
+        if (dist < radius) {
+          hex.classList.add('active');
+        } else {
+          hex.classList.remove('active');
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

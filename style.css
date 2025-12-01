@@ -1,0 +1,441 @@
+/* ===== أساسيات ===== */
+body {
+  font-family: "Cairo", sans-serif;
+  margin: 0;
+  background: #0b0b0b;
+  color: #E0E0E0;
+  text-align: center;
+  overflow: auto;
+}
+
+.hex-grid {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.hex {
+  position: absolute;
+  width: 60px;
+  height: 52px;
+  background: #0b0b0b;
+  clip-path: polygon(
+    50% 0%, 100% 25%, 100% 75%,
+    50% 100%, 0% 75%, 0% 25%
+  );
+  border: 2px solid #1f1f1f;
+  transition: 0.1s ease-out, box-shadow 0.1s ease-out, border-color 0.1s ease-out;
+}
+
+.hex.active {
+  border-color: #4bd1ff;
+  box-shadow:
+    0 0 6px #4bd1ff,
+    0 0 12px #4bd1ff,
+    inset 0 0 6px #4bd1ff;
+  z-index: 10;
+}
+
+a {
+  text-decoration: none;
+  color: #00B4D8;
+}
+
+/* ===== الرأس ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1E1E2F;
+  padding: 15px 30px;
+  flex-wrap: wrap;
+}
+
+.header nav a {
+  margin: 0 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.header nav a:hover {
+  color: #90E0EF;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2px solid #00B4D8;
+}
+
+.animated-text {
+  font-size: 22px;
+  font-weight: bold;
+  color: #90E0EF;
+}
+
+/* ===== البحث ===== */
+.search-section {
+  padding: 20px;
+}
+
+.search-section input {
+  width: 300px;
+  max-width: 100%;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid #00B4D8;
+  outline: none;
+  font-size: 16px;
+  color: #1E1E2F;
+  background: #E0E0E0;
+}
+
+/* ===== المعلمين ===== */
+.teachers-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+  gap: 25px;
+  justify-items: center;
+  padding: 20px;
+}
+
+.teacher-card {
+  background-color: #2A2A3F;
+  border: 2px solid #00B4D8;
+  border-radius: 15px;
+  padding: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.teacher-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 15px #0077B6;
+}
+
+.teacher-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00B4D8;
+}
+
+.teacher-card h3, .teacher-card h2 {
+  color: #90E0EF;
+  margin: 10px 0 5px;
+}
+
+.teacher-card p {
+  color: #B0B0B0;
+  margin: 5px 0;
+}
+
+.teacher-card button {
+  background-color: #00B4D8;
+  color: #1E1E2F;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.teacher-card button:hover {
+  background-color: #0077B6;
+  color: #E0E0E0;
+}
+
+/* ===== المنشورات تمتد لملء الصفحة ===== */
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.post {
+  background-color: #2A2A3F;
+  border: 2px solid #FFD700;
+  border-radius: 15px;
+  padding: 10px;
+  flex: 1 1 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post img, .post iframe {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.post h3 {
+  color: #FFD700;
+  margin-bottom: 10px;
+}
+
+/* ===== الفوتر ===== */
+.footer {
+  background-color: #1E1E2F;
+  color: #E0E0E0;
+  padding: 25px 10px;
+  border-top: 2px solid #00B4D8;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer a {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #00B4D8;
+  background-color: #2A2A3F;
+  color: #E0E0E0;
+  transition: 0.3s;
+}
+
+.footer a:hover {
+  background-color: #00B4D8;
+  color: #1E1E2F;
+}
+
+.footer a img {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+/* ===== تجاوب الهواتف ===== */
+@media screen and (max-width: 600px) {
+  .teachers-container {
+    grid-template-columns: 1fr;
+  }
+
+  .teacher-card img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .teacher-card h3, .teacher-card h2 {
+    font-size: 18px;
+  }
+
+  .teacher-card p {
+    font-size: 12px;
+  }
+
+  .post img, .post iframe {
+    height: 250px;
+  }
+
+  .header {
+    padding: 10px 15px;
+  }
+
+  .logo-img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .animated-text {
+    font-size: 18px;
+  }
+
+  .search-section input {
+    width: 250px;
+  }
+}
+
+/* ===== تجاوب التابلت ===== */
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  .teachers-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .teacher-card img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .teacher-card h3, .teacher-card h2 {
+    font-size: 20px;
+  }
+
+  .teacher-card p {
+    font-size: 14px;
+  }
+
+  .post img, .post iframe {
+    height: 300px;
+  }
+
+  .header {
+    padding: 12px 20px;
+  }
+
+  .logo-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .animated-text {
+    font-size: 20px;
+  }
+
+  .search-section input {
+    width: 280px;
+  }
+}
+
+/* ===== تجاوب اللابتوب ===== */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .teachers-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .teacher-card img {
+    width: 115px;
+    height: 115px;
+  }
+
+  .teacher-card h3, .teacher-card h2 {
+    font-size: 21px;
+  }
+
+  .teacher-card p {
+    font-size: 15px;
+  }
+
+  .post img, .post iframe {
+    height: 350px;
+  }
+
+  .header {
+    padding: 14px 25px;
+  }
+
+  .logo-img {
+    width: 52px;
+    height: 52px;
+  }
+
+  .animated-text {
+    font-size: 21px;
+  }
+
+  .search-section input {
+    width: 290px;
+  }
+}
+.contact-btn {
+  padding: 15px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  width: 250px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.contact-btn.phone-btn {
+  background-color: #00B4D8; /* أزرق للاتصال */
+}
+
+.contact-btn.phone-btn:hover {
+  background-color: #0077B6;
+}
+
+.contact-btn.wa-btn {
+  background-color: #25D366; /* أخضر للواتس */
+}
+
+.contact-btn.wa-btn:hover {
+  background-color: #128C7E;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.slide-up {
+  transform: translateY(50px);
+  opacity: 0;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.header {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.animated-text {
+  animation: fadeIn 2s ease-in-out 0.5s both;
+}
+
+.teacher-card {
+  animation: slideUp 0.8s ease-out forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+.teacher-card button:hover {
+  transform: scale(1.05);
+  animation: bounce 0.6s;
+}
+
+.header nav a:hover {
+  animation: bounce 0.4s;
+}

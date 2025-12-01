@@ -1,0 +1,66 @@
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: #1E1E2F;
+  color: #E0E0E0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: #111;
+  color: #FFD700;
+  padding: 15px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.contact-section {
+  margin: 50px auto;
+  max-width: 500px;
+  background-color: #2A2A3F;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.contact-btn {
+  padding: 15px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.contact-btn.phone-btn {
+  background-color: #00B4D8;
+}
+
+.contact-btn.phone-btn:hover {
+  background-color: #0077B6;
+}
+
+.contact-btn.wa-btn {
+  background-color: #25D366;
+}
+
+.contact-btn.wa-btn:hover {
+  background-color: #128C7E;
+}
+
+footer {
+  background-color: #111;
+  color: #FFD700;
+  text-align: center;
+  padding: 15px;
+  margin-top: 50px;
+}
